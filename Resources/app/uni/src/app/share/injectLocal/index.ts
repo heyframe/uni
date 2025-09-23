@@ -1,0 +1,27 @@
+import type { InjectionKey } from 'vue'
+import { getCurrentInstance, hasInjectionContext, inject } from 'vue'
+import { localProvidedStateMap } from '@/app/share/provideLocal/map'
+
+/**
+ * On the basis of `inject`, it is allowed to directly call inject to obtain the value after call provide in the same component.
+ *
+ * @example
+ * ```ts
+ * injectLocal('MyInjectionKey', 1)
+ * const injectedValue = injectLocal('MyInjectionKey') // injectedValue === 1
+ * ```
+ *
+ * @__NO_SIDE_EFFECTS__
+ */
+export const injectLocal: typeof inject = <T>(...args) => {
+  const key = args[0] as InjectionKey<T> | string | number
+  const instance = getCurrentInstance()?.proxy
+  if (instance == null && !hasInjectionContext())
+    throw new Error('injectLocal must be called in setup')
+
+  if (instance && localProvidedStateMap.has(instance) && key in localProvidedStateMap.get(instance)!)
+    return localProvidedStateMap.get(instance)![key]
+
+  // @ts-expect-error overloads are not compatible
+  return inject(...args)
+}

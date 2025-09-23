@@ -1,0 +1,19 @@
+import Store from '@/app/store';
+import '@/app/store/api.context.store'
+import HeyUni from "@/heyuni-instance";
+/**
+ * @sw-package framework
+ * @private
+ */
+export default function initStore() {
+    const app = HeyUni.Application?.view?.app;
+
+    /**
+     * This code does two things:
+     * 1. Initializing the Pinia singleton by accessing the instance getter.
+     * 2. Registering the Pinia plugin with Vue before the first store is trying to be registered.
+     */
+    if (app) {
+        app.use(Store.instance._rootState);
+    }
+}

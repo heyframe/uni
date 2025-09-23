@@ -1,0 +1,7 @@
+name: Release
+# Prepares release PR, and publishes packages when it's merged
+
+on:
+  push:
+    branches:
+      - main
