@@ -2,13 +2,15 @@ import {defineConfig, loadEnv} from "vite";
 import Uni from '@uni-helper/plugin-uni'
 import * as path from "node:path";
 import colors from 'picocolors';
-import UniManifest from './vite/vite-plugins/uni-manifest-plugin'
+import UniManifest from '@uni-helper/vite-plugin-uni-manifest'
 import UniComponents from '@uni-helper/vite-plugin-uni-components'
 import {NutResolver} from "@heyframe/nutui-uniapp";
 import AutoImport from 'unplugin-auto-import/vite'
 import UnoCSS from 'unocss/vite'
 import ViteRestart from 'vite-plugin-restart'
-
+import UniPages from '@uni-helper/vite-plugin-uni-pages'
+import UniLayouts from '@uni-helper/vite-plugin-uni-layouts'
+import UniPlatform from '@uni-helper/vite-plugin-uni-platform'
 export default defineConfig(({command, mode}) => {
   const isProd = command === 'build';
   const isDev = !isProd;
@@ -27,6 +29,13 @@ export default defineConfig(({command, mode}) => {
   return {
     base,
     plugins: [
+      UniPages({
+        exclude: ['**/components/**/**.*'],
+        dts: 'src/types/uni-pages.d.ts',
+        minify: true,
+      }),
+      UniLayouts(),
+      UniPlatform(),
       UniManifest(),
       UniComponents({
         deep: true,
@@ -68,6 +77,7 @@ export default defineConfig(({command, mode}) => {
       },
     },
     server: {
+      hmr: true,
       host: process.env.HOST ? process.env.HOST : 'localhost',
       port: Number(VITE_APP_PORT) || 9000,
       proxy: isDev ? {

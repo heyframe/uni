@@ -1,6 +1,5 @@
 <template>
   <view class="content">
-    <nut-button type="info">信息按钮</nut-button>
     <view class="text-area">
       <text class="bg-amber">{{ userInfo?.nickname }}</text>
     </view>
@@ -25,6 +24,15 @@
 import { ref, onMounted } from 'vue';
 import { useUser } from "@/app/composables/useUser/useUser";
 import {useListing} from "@/app/composables/useListing/useListing";
+import {definePage} from "@uni-helper/vite-plugin-uni-pages";
+
+definePage({
+  type: 'home',
+  style: {
+    navigationStyle: 'custom',
+    navigationBarTitleText: '首页',
+  },
+})
 
 const userComposable = useUser();
 const userInfo = ref<any>(null);
@@ -32,9 +40,9 @@ const products = ref<any[]>([]);
 
 const { search, getElements } = useListing({
   listingType: "categoryListing",
-  categoryId: "77b959cf66de4c1590c7f9b7da3982f3", // entrypoint to browse
+  categoryId: "01998723f6187075b5cb80b9f517037a", // entrypoint to browse
   defaultSearchCriteria: { // set the default criteria
-    limit: 3,
+    limit: 4,
     p: 1,
   },
 });
@@ -52,7 +60,7 @@ onMounted(async () => {
     },
   });
 
-  products.value = getElements.value.slice(0, 3);
+  products.value = getElements.value.slice(0, 4);
 });
 </script>
 

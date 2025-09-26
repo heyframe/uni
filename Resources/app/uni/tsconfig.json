@@ -2,20 +2,33 @@
   "compilerOptions": {
     "composite": true,
     "target": "esnext",
-    "lib": ["esnext", "dom"],
+    "lib": [
+      "esnext",
+      "dom"
+    ],
     "baseUrl": ".",
     "module": "ESNext",
     "esModuleInterop": true,
     "moduleResolution": "node",
     "paths": {
-      "@/*": ["./src/*"],
-      "@static/*": ["./src/static/*"]
+      "@/*": [
+        "./src/*"
+      ],
+      "@static/*": [
+        "./src/static/*"
+      ]
     },
     "resolveJsonModule": true,
     "types": [
       "@dcloudio/types",
-      "node"
+      "@uni-helper/uni-app-types",
+      "nutui-uniapp/global.d.ts"
     ],
+    "compilerOptions": {
+      "types": [
+        "@uni-helper/vite-plugin-uni-pages"
+      ]
+    },
     "allowJs": true,
     "noImplicitThis": true,
     "outDir": "dist",
@@ -24,7 +37,9 @@
     "skipLibCheck": true
   },
   "vueCompilerOptions": {
-    "plugins": ["@uni-helper/uni-types/volar-plugin"]
+    "plugins": [
+      "@uni-helper/uni-types/volar-plugin"
+    ]
   },
   "include": [
     "src/**/*.ts",
@@ -32,5 +47,7 @@
     "src/**/*.tsx",
     "src/**/*.vue"
   ],
-  "exclude": ["node_modules"]
+  "exclude": [
+    "node_modules"
+  ]
 }
