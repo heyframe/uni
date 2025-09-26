@@ -12,13 +12,18 @@ import ViteRestart from 'vite-plugin-restart'
 export default defineConfig(({command, mode}) => {
   const isProd = command === 'build';
   const isDev = !isProd;
-  const base = isProd ? '/bundles/uni/uni' : undefined;
+  const {UNI_PLATFORM, BUNDLE_NAME} = process.env
 
-  const {UNI_PLATFORM} = process.env
+  const base = isProd ? `/bundles/${BUNDLE_NAME}/uni` : undefined;
+
+
   console.log(colors.yellow(`UNI_PLATFORM: ${UNI_PLATFORM}`))
+  console.log(colors.yellow(`BUNDLE_NAME: ${BUNDLE_NAME}`))
+  console.log(colors.yellow(`APP_URL: ${process.env.APP_URL}`))
+
 
   const env = loadEnv(mode, path.resolve(process.cwd()))
-  const {VITE_APP_PORT,} = env
+  const {VITE_APP_PORT} = env
   return {
     base,
     plugins: [
@@ -65,6 +70,13 @@ export default defineConfig(({command, mode}) => {
     server: {
       host: process.env.HOST ? process.env.HOST : 'localhost',
       port: Number(VITE_APP_PORT) || 9000,
+      proxy: isDev ? {
+        '/front-api': {
+          target: process.env.APP_URL,
+          changeOrigin: true,
+          secure: false,
+        },
+      }:undefined,
     },
     build: {
       sourcemap: false,
