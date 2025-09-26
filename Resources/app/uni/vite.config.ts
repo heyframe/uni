@@ -12,13 +12,13 @@ import ViteRestart from 'vite-plugin-restart'
 export default defineConfig(({command, mode}) => {
   const isProd = command === 'build';
   const isDev = !isProd;
-  const {UNI_PLATFORM, BUNDLE_NAME} = process.env
+  const {UNI_PLATFORM, UNI_PLUGIN_NAME} = process.env
 
-  const base = isProd ? `/bundles/${BUNDLE_NAME}/uni` : undefined;
+  const base = isProd ? `/bundles/${UNI_PLUGIN_NAME}/uni` : undefined;
 
 
   console.log(colors.yellow(`UNI_PLATFORM: ${UNI_PLATFORM}`))
-  console.log(colors.yellow(`BUNDLE_NAME: ${BUNDLE_NAME}`))
+  console.log(colors.yellow(`UNI_PLUGIN_NAME: ${UNI_PLUGIN_NAME}`))
   console.log(colors.yellow(`APP_URL: ${process.env.APP_URL}`))
 
 
