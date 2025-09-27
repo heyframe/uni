@@ -1,7 +1,6 @@
 import type {default as Bottle, Decorator} from 'bottlejs';
 import type ApiServiceFactory from '@/core/factory/api-service.factory';
 import type AccountService from "@/core/service/api/account.service";
-import type { ComponentInternalInstance, PropType as VuePropType } from 'vue';
 import type {ApiContextStore} from "@/app/store/api.context.store";
 import type LocaleFactory from '@/core/factory/locale.factory';
 
@@ -20,31 +19,10 @@ declare global {
    * the places where we need to fix the TS types
    */
   type $TSFixMe = any;
-  type $TSFixMeFunction = (...args: any[]) => any;
-
-  /**
-   * Dangerous "unknown" types which are specific enough but do not provide type safety.
-   * You should avoid using these.
-   */
-  type $TSDangerUnknownObject = { [key: string | symbol]: unknown };
-
-  /**
-   * Mark some properties as required
-   */
-  type Require<T, K extends keyof T> = T & { [P in K]-?: T[P] };
-
-  /**
-   * Mark some properties as optional
-   */
-  type Optional<T, K extends keyof T> = T & { [P in K]?: T[P] };
 
   interface CustomHeyUniProperties {
   }
 
-  /**
-   * Mark some properties as optional
-   */
-  type Remove<T, K extends keyof T> = T & { [P in K]?: never };
 
   interface InitPostContainer extends SubContainer<'init-post'> {
   }
@@ -74,8 +52,6 @@ declare global {
   interface PiniaRootState {
     apiContext: ApiContextStore;
   }
-
-  type PropType<T> = VuePropType<T>;
 
   type apiContext = ApiContextStore['api'];
 }

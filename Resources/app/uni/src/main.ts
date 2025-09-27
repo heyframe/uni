@@ -4,6 +4,7 @@ import 'uno.css'
 
 import { apiConfig } from '@/config/env';
 
+console.log(apiConfig)
 void (async () => {
   await HeyUni.Application.start({
     apiContext: {

@@ -1,43 +1,17 @@
-import path from 'node:path'
-import process from 'node:process'
 import { defineManifestConfig } from '@uni-helper/vite-plugin-uni-manifest'
-import { loadEnv } from 'vite'
-
-function getMode() {
-  const args = process.argv.slice(2)
-  const modeFlagIndex = args.findIndex(arg => arg === '--mode')
-  return modeFlagIndex !== -1 ? args[modeFlagIndex + 1] : args[0] === 'build' ? 'production' : 'development' // 默认 development
-}
-
-const env = loadEnv(getMode(), path.resolve(process.cwd()))
-const {
-  VITE_APP_TITLE,
-  VITE_UNI_APPID,
-  VITE_WX_APPID,
-  VITE_APP_PUBLIC_BASE,
-  VITE_FALLBACK_LOCALE,
-} = env
 
 export default defineManifestConfig({
-  'name': VITE_APP_TITLE,
-  'appid': VITE_UNI_APPID,
+  'name': 'vitesse-uni-app',
+  'appid': '',
   'description': '',
   'versionName': '1.0.0',
   'versionCode': '100',
-  'locale': VITE_FALLBACK_LOCALE, // 'zh-Hans'
-  'h5': {
-    router: {
-      base: VITE_APP_PUBLIC_BASE,
-    },
-  },
+  'transformPx': false,
   /* 5+App特有相关 */
   'app-plus': {
     usingComponents: true,
     nvueStyleCompiler: 'uni-app',
     compilerVersion: 3,
-    compatible: {
-      ignoreVersion: true,
-    },
     splashscreen: {
       alwaysShowBeforeRender: true,
       waiting: true,
@@ -50,9 +24,6 @@ export default defineManifestConfig({
     distribute: {
       /* android打包配置 */
       android: {
-        minSdkVersion: 21,
-        targetSdkVersion: 30,
-        abiFilters: ['armeabi-v7a', 'arm64-v8a'],
         permissions: [
           '<uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>',
           '<uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>',
@@ -75,67 +46,32 @@ export default defineManifestConfig({
       ios: {},
       /* SDK配置 */
       sdkConfigs: {},
-      /* 图标配置 */
-      icons: {
-        android: {
-          hdpi: 'static/app/icons/72x72.png',
-          xhdpi: 'static/app/icons/96x96.png',
-          xxhdpi: 'static/app/icons/144x144.png',
-          xxxhdpi: 'static/app/icons/192x192.png',
-        },
-        ios: {
-          appstore: 'static/app/icons/1024x1024.png',
-          ipad: {
-            'app': 'static/app/icons/76x76.png',
-            'app@2x': 'static/app/icons/152x152.png',
-            'notification': 'static/app/icons/20x20.png',
-            'notification@2x': 'static/app/icons/40x40.png',
-            'proapp@2x': 'static/app/icons/167x167.png',
-            'settings': 'static/app/icons/29x29.png',
-            'settings@2x': 'static/app/icons/58x58.png',
-            'spotlight': 'static/app/icons/40x40.png',
-            'spotlight@2x': 'static/app/icons/80x80.png',
-          },
-          iphone: {
-            'app@2x': 'static/app/icons/120x120.png',
-            'app@3x': 'static/app/icons/180x180.png',
-            'notification@2x': 'static/app/icons/40x40.png',
-            'notification@3x': 'static/app/icons/60x60.png',
-            'settings@2x': 'static/app/icons/58x58.png',
-            'settings@3x': 'static/app/icons/87x87.png',
-            'spotlight@2x': 'static/app/icons/80x80.png',
-            'spotlight@3x': 'static/app/icons/120x120.png',
-          },
-        },
-      },
     },
   },
   /* 快应用特有相关 */
   'quickapp': {},
   /* 小程序特有相关 */
   'mp-weixin': {
-    appid: VITE_WX_APPID,
+    appid: '',
     setting: {
       urlCheck: false,
-      // 是否启用 ES6 转 ES5
-      es6: true,
-      minified: true,
-    },
-    optimization: {
-      subPackages: true,
     },
     usingComponents: true,
-    lazyCodeLoading: "requiredComponents",
+    darkmode: true,
+    themeLocation: 'theme.json',
   },
   'mp-alipay': {
     usingComponents: true,
-    styleIsolation: 'shared',
   },
   'mp-baidu': {
     usingComponents: true,
   },
   'mp-toutiao': {
     usingComponents: true,
+  },
+  'h5': {
+    darkmode: true,
+    themeLocation: 'theme.json',
   },
   'uniStatistics': {
     enable: false,

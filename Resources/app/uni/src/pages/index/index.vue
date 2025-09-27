@@ -1,8 +1,5 @@
 <template>
   <view class="content">
-    <view class="text-area">
-      <text class="bg-amber">{{ userInfo?.nickname }}</text>
-    </view>
     <view class="product-list">
       <view
         class="product-item"
@@ -11,12 +8,15 @@
       >
         <image
           class="product-cover"
-          :src="product.cover?.media?.url || '/static/logo.png'"
+          :src="product.cover?.media?.url || '/static/logo.svg'"
         />
         <text class="product-name">{{ product.name }}</text>
         <text class="product-price">¥{{ product.calculatedPrice?.unitPrice || 0 }}</text>
       </view>
     </view>
+  </view>
+  <view class="text-area">
+    <text class="bg-amber">{{ userInfo?.nickname }}</text>
   </view>
 </template>
 
@@ -28,10 +28,6 @@ import {definePage} from "@uni-helper/vite-plugin-uni-pages";
 
 definePage({
   type: 'home',
-  style: {
-    navigationStyle: 'custom',
-    navigationBarTitleText: '首页',
-  },
 })
 
 const userComposable = useUser();

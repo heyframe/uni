@@ -1,14 +1,3 @@
 <script setup lang="ts">
-import { onLaunch, onShow, onHide } from "@dcloudio/uni-app";
-onLaunch(() => {
-});
-onShow(() => {
-
-});
-onHide(() => {
-
-});
+onLaunch(() => {})
 </script>
-<style lang="scss">
-@import '@heyframe/nutui-uniapp/styles/index';
-</style>

@@ -1,8 +1,7 @@
-import {ComputedRef, Ref,computed} from "vue";
 import useApiContext from "@/app/composables/useApiContext/use-api-context";
 import ContextError from "@/app/composables/helpers/ContextError";
 import {useContext} from "@/app/composables/useContext/useContext";
-import {Schemas} from "@/api-client/api-types/frontApiTypes";
+import type {Schemas} from "@/api-client/api-types/frontApiTypes";
 
 export type UseCategoryReturn = {
   /**

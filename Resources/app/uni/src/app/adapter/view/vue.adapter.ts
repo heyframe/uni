@@ -3,7 +3,8 @@ import type {App} from 'vue';
 import {createApp} from 'vue';
 import type ApplicationBootstrapper from "@/core/application";
 import RootApp from "@/App.vue";
-import {I18n} from "vue-i18n";
+import type {I18n} from "vue-i18n";
+
 
 /**
  * @private

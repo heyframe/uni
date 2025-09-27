@@ -9,6 +9,7 @@ lerna-debug.log*
 
 node_modules
 .DS_Store
+dist
 *.local
 
 # Editor directories and files
@@ -19,9 +20,7 @@ node_modules
 *.sln
 *.sw?
 
-uni-pages.d.ts
-src/auto-imports.d.ts
-src/components.d.ts
-src/pages.json
-dist
+manifest.json
+pages.json
 .env.development
+.env.production

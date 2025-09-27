@@ -25,6 +25,8 @@
       "nutui-uniapp/global.d.ts"
     ],
     "compilerOptions": {
+      "allowJs": true,
+      "checkJs": false,
       "types": [
         "@uni-helper/vite-plugin-uni-pages"
       ]
@@ -43,6 +45,7 @@
   },
   "include": [
     "src/**/*.ts",
+    "src/**/*.js",
     "src/**/*.d.ts",
     "src/**/*.tsx",
     "src/**/*.vue"

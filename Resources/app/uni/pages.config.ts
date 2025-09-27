@@ -1,17 +1,21 @@
-import { isH5 } from '@uni-helper/uni-env'
 import { defineUniPages } from '@uni-helper/vite-plugin-uni-pages'
 
 export default defineUniPages({
+  pages: [],
   globalStyle: {
-    navigationBarBackgroundColor: '@navBgColor',
-    navigationBarTextStyle: '@navTxtStyle',
-    navigationBarTitleText: 'NutUi',
     backgroundColor: '@bgColor',
-    backgroundTextStyle: '@bgTxtStyle',
-    backgroundColorTop: '@bgColorTop',
     backgroundColorBottom: '@bgColorBottom',
+    backgroundColorTop: '@bgColorTop',
+    backgroundTextStyle: '@bgTxtStyle',
+    navigationBarBackgroundColor: '#000000',
+    navigationBarTextStyle: '@navTxtStyle',
+    navigationBarTitleText: 'Vitesse-Uni',
+    navigationStyle: 'custom',
   },
-  // tabbar 的配置统一在 “./src/tabbar/config.ts” 文件中
-  // 无tabbar模式下，h5 设置为 {} 为了防止浏览器报错导致白屏
-  // tabBar: (isH5 ? {} : undefined) as any,
+  // tabBar: {
+  //   backgroundColor: "@tabBgColor",
+  //   borderStyle: "@tabBorderStyle",
+  //   color: "@tabFontColor",
+  //   selectedColor: "@tabSelectedColor",
+  // },
 })
